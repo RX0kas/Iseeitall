@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "iseeitall",
+  "version": "${version}",
+  "name": "ISIA",
+  "description": "It's a fabric server side logger mod.",
+  "authors": ["ninjagoku4560"],
+  "contact": {
+    "repo": "https://github.com/ninjagoku4560/Iseeitall"
+  },
+  "license": "MIT",
+  "icon": "assets/iseeitall/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "client": [
+      "fr.ninjagoku4560.iseeitall.client.IseeitallClient"
+    ],
+    "main": [
+      "fr.ninjagoku4560.iseeitall.Iseeitall"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
