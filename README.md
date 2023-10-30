@@ -1,5 +1,5 @@
 # ISIA (Iseeitall)
-![GitHub issues by-label](https://img.shields.io/github/issues/ninjagoku4560/iseeitall/bug?logo=github&logoColor=white) ![Modrinth Version](https://img.shields.io/modrinth/v/iseeitall?logo=modrinth) ![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/ninjagoku4560/iseeitall?logo=github&logoColor=white&label=Last%20Update)
+[![Texte alternatif](https://img.shields.io/github/issues/ninjagoku4560/iseeitall/bug?logo=github&logoColor=white)](https://github.com/ninjagoku4560/Iseeitall/issues) [![Modrinth Version](https://img.shields.io/modrinth/v/iseeitall?logo=modrinth)](https://modrinth.com/mod/iseeitall/versions) [![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/ninjagoku4560/iseeitall?logo=github&logoColor=white&label=Last%20Update)](https://github.com/ninjagoku4560/Iseeitall/releases)
 
 **It's a fabric server side logger mod for 1.20.2**
 
