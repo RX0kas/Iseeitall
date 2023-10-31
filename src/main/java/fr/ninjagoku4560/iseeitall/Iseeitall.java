@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 
@@ -38,7 +39,9 @@ public class Iseeitall implements ModInitializer {
 
         // Player use an Item
         UseItemCallback.EVENT.register((player, world, hand) -> {
-           LOGGER.info("The player "+player.getName().toString()+" used " + hand.toString());
+            ItemStack heldItemStack = player.getStackInHand(hand);
+            Item heldItem = heldItemStack.getItem();
+            LOGGER.info("The player " + player.getName().toString() + " used " + getItemName(heldItem));
             return TypedActionResult.pass(ItemStack.EMPTY);
         });
 
@@ -51,7 +54,14 @@ public class Iseeitall implements ModInitializer {
             String[] name = EntityName.split("\\.");
             return name[name.length-1];
         } else {
-            return entity.getType().toString();
+            String EntityName = entity.getType().toString();
+            String[] name = EntityName.split("\\.");
+            return name[name.length-1];
         }
+    }
+    private String getItemName(Item item) {
+        String ItemName = item.getTranslationKey();
+        String[] name = ItemName.split("\\.");
+        return name[name.length-1];
     }
 }
