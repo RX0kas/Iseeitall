@@ -1,5 +1,7 @@
 {
-  "logwhenhit": true,
-  "logwhenuseItem": true,
-  "logwhenbreakblock": true
+  "logwhen": {
+    "hit": true,
+    "useItem": true,
+    "breakblock": true
+  }
 }
