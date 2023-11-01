@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -11,6 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,7 +32,7 @@ public class Iseeitall implements ModInitializer {
         if (ConfigLoader.getBoolConfig("logwhen","breakBlock")) {
             // Player break a block
             AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
-                LOGGER.info("The player "+player.getName().toString()+" to break " + pos.toString() + "in " + world.toString());
+                LOGGER.info("The player "+player.getName().toString()+" to break " + getBlockName(world,pos));
                 return PASS;
             });
         }
@@ -69,5 +72,9 @@ public class Iseeitall implements ModInitializer {
         String ItemName = item.getTranslationKey();
         String[] name = ItemName.split("\\.");
         return name[name.length-1];
+    }
+    private String getBlockName(World world, BlockPos blockPos) {
+        Block block = world.getBlockState(blockPos).getBlock();
+        return block.getTranslationKey();
     }
 }
