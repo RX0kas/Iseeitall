@@ -1,0 +1,5 @@
+{
+  "logwhenhit": true,
+  "logwhenuseItem": true,
+  "logwhenbreakblock": true
+}
