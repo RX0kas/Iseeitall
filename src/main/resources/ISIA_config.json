@@ -1,0 +1,7 @@
+{
+  "logwhen": {
+    "hitEntity": true,
+    "useItem": true,
+    "breakBlock": true
+  }
+}

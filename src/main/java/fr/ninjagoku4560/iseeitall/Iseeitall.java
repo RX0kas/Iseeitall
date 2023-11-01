@@ -14,6 +14,7 @@ import net.minecraft.util.TypedActionResult;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+
 public class Iseeitall implements ModInitializer {
     /**
      * Runs the mod initializer.
@@ -25,26 +26,31 @@ public class Iseeitall implements ModInitializer {
 
         ActionResult PASS = ActionResult.PASS;
 
-        // Player break a block
-        AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
-            LOGGER.info("The player "+player.getName().toString()+" to break " + pos.toString() + "in " + world.toString());
-            return PASS;
-        });
+        if (ConfigLoader.getBoolConfig("logwhen","breakBlock")) {
+            // Player break a block
+            AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
+                LOGGER.info("The player "+player.getName().toString()+" to break " + pos.toString() + "in " + world.toString());
+                return PASS;
+            });
+        }
 
-        // Player hit other entity
-        AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
-            LOGGER.info("The player "+player.getName().toString() + " hit " + getEntityName(entity));
-            return PASS;
-        });
+        if (ConfigLoader.getBoolConfig("logwhen","hitEntity")) {
+            // Player hit other entity
+            AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
+                LOGGER.info("The player " + player.getName().toString() + " hit " + getEntityName(entity));
+                return PASS;
+            });
+        }
 
-        // Player use an Item
-        UseItemCallback.EVENT.register((player, world, hand) -> {
-            ItemStack heldItemStack = player.getStackInHand(hand);
-            Item heldItem = heldItemStack.getItem();
-            LOGGER.info("The player " + player.getName().toString() + " used " + getItemName(heldItem));
-            return TypedActionResult.pass(ItemStack.EMPTY);
-        });
-
+        if (ConfigLoader.getBoolConfig("logwhen","useItem")) {
+            // Player use an Item
+            UseItemCallback.EVENT.register((player, world, hand) -> {
+                ItemStack heldItemStack = player.getStackInHand(hand);
+                Item heldItem = heldItemStack.getItem();
+                LOGGER.info("The player " + player.getName().toString() + " used " + getItemName(heldItem));
+                return TypedActionResult.pass(ItemStack.EMPTY);
+            });
+        }
     }
 
 
