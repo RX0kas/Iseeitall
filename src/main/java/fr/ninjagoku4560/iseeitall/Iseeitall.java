@@ -1,5 +1,6 @@
 package fr.ninjagoku4560.iseeitall;
 
+import com.moandjiezana.toml.Toml;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
@@ -27,9 +28,16 @@ public class Iseeitall implements ModInitializer {
     public void onInitialize() {
         LOGGER.info("Initialization of the ISIA mod server side");
 
+        Toml ConfigFile = TomlConfigLoader.load();
+
+        Boolean logWhenBreakBlock = ConfigFile.getBoolean("LogWhenBreakBlock");
+        Boolean logWhenHitEntity = ConfigFile.getBoolean("LogWhenHitEntity");
+        Boolean logWhenUseItem = ConfigFile.getBoolean("LogWhenUseItem");
+
+
         ActionResult PASS = ActionResult.PASS;
 
-        if (ConfigLoader.getBoolConfig("logwhen","breakBlock")) {
+        if (logWhenBreakBlock) {
             // Player break a block
             AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
                 LOGGER.info("The player "+player.getName().toString()+" to break " + getBlockName(world,pos));
@@ -37,7 +45,7 @@ public class Iseeitall implements ModInitializer {
             });
         }
 
-        if (ConfigLoader.getBoolConfig("logwhen","hitEntity")) {
+        if (logWhenHitEntity) {
             // Player hit other entity
             AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
                 LOGGER.info("The player " + player.getName().toString() + " hit " + getEntityName(entity));
@@ -45,7 +53,7 @@ public class Iseeitall implements ModInitializer {
             });
         }
 
-        if (ConfigLoader.getBoolConfig("logwhen","useItem")) {
+        if (logWhenUseItem) {
             // Player use an Item
             UseItemCallback.EVENT.register((player, world, hand) -> {
                 ItemStack heldItemStack = player.getStackInHand(hand);

@@ -1,7 +1,5 @@
 {
-  "logwhen": {
-    "hitEntity": true,
-    "useItem": true,
-    "breakBlock": true
-  }
+    "LogWhenHitEntity": true,
+    "LogWhenUseItem": true,
+    "LogWhenBreakBlock": true
 }

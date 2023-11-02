@@ -1,0 +1,3 @@
+LogWhenHitEntity = true
+LogWhenUseItem = true
+LogWhenBreakBlock = true
