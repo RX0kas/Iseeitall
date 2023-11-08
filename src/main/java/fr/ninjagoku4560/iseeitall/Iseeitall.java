@@ -27,12 +27,8 @@ public class Iseeitall implements ModInitializer {
     @Override
     public void onInitialize() {
         LOGGER.info("Initialization of the ISIA mod server side");
+        TxTConfigLoader.createConfigFile();
 
-        /*Toml ConfigFile = TomlConfigLoader.load();
-
-        Boolean logWhenBreakBlock = ConfigFile.getBoolean("LogWhenBreakBlock");
-        Boolean logWhenHitEntity = ConfigFile.getBoolean("LogWhenHitEntity");
-        Boolean logWhenUseItem = ConfigFile.getBoolean("LogWhenUseItem");*/
 
 
         ActionResult PASS = ActionResult.PASS;
