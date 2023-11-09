@@ -32,8 +32,12 @@ public class Iseeitall implements ModInitializer {
 
 
         ActionResult PASS = ActionResult.PASS;
-
-        if (true/*logWhenBreakBlock*/) {
+        ////////////////////////////////
+        //0 = logWhenBreakBlock       //
+        //1 = logWhenHitEntity        //
+        //2 = logWhenUseItem          //
+        ////////////////////////////////
+        if (TxTConfigLoader.getBooleanConfig(0)) {
             // Player break a block
             AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
                 LOGGER.info("The player "+player.getName().toString()+" to break " + getBlockName(world,pos));
@@ -41,7 +45,7 @@ public class Iseeitall implements ModInitializer {
             });
         }
 
-        if (true/*logWhenHitEntity*/) {
+        if (TxTConfigLoader.getBooleanConfig(1)) {
             // Player hit other entity
             AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
                 LOGGER.info("The player " + player.getName().toString() + " hit " + getEntityName(entity));
@@ -49,7 +53,7 @@ public class Iseeitall implements ModInitializer {
             });
         }
 
-        if (true/*logWhenUseItem*/) {
+        if (TxTConfigLoader.getBooleanConfig(2)) {
             // Player use an Item
             UseItemCallback.EVENT.register((player, world, hand) -> {
                 ItemStack heldItemStack = player.getStackInHand(hand);

@@ -1,6 +1,5 @@
 package fr.ninjagoku4560.iseeitall;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.List;
 
 public class TxTConfigLoader {
 
-    static String DefaultTxTContent = "";
+    static String DefaultTxTContent = "logWhenBreakBlock=false\nlogWhenHitEntity=true\nlogWhenUseItem=true";
 
 
     public static void createConfigFile() {
@@ -48,59 +47,51 @@ public class TxTConfigLoader {
             }
             reader.close();
             return content.toString();
-        } catch (FileNotFoundException e) {
-            Iseeitall.LOGGER.error("Config File not found");
-            Iseeitall.LOGGER.error(e);
         } catch (IOException e) {
-            Iseeitall.LOGGER.error("IOExection");
-            Iseeitall.LOGGER.error(e);
+            Iseeitall.LOGGER.error(e.getMessage(), e);
         }
         return "error";
-
     }
 
-    public static List<String> ToList(@NotNull String str,String RequestValue) {
-        String[] List = str.split("\n");
-        List<String> ConfigNames = new ArrayList<>();
+    public static List<String> ToList(String str, String RequestValue) {
+        String[] List1 = str.split("\n");
+        List<String> ConfigNames = new ArrayList<>(); // Initialisez les listes en dehors de la boucle
         List<String> ConfigData = new ArrayList<>();
 
-        for (int i = 0; i < List.length; i+=2) {
-            ConfigNames.add(List[i]);
-            ConfigData.add(List[i+1]);
+        for (String s : List1) {
+            String[] List = s.split("=");
+
+            for (int i = 0; i < List.length; i += 2) {
+                ConfigNames.add(List[i]);
+                ConfigData.add(List[i + 1]);
+            }
         }
         if (RequestValue.equalsIgnoreCase("name") || RequestValue.equalsIgnoreCase("names")) {
             return ConfigNames;
         } else if (RequestValue.equalsIgnoreCase("data")) {
             return ConfigData;
         } else {
-            Iseeitall.LOGGER.error("ToList function has a wrong parameter for RequestValue");
-            Iseeitall.LOGGER.error("If you are not a dev ignore this message");
+            System.out.println("ToList function has a wrong parameter for RequestValue");
+            System.out.println("If you are not a dev ignore this message");
             return new ArrayList<>();
         }
     } // data or names
 
-    public static int FindPosition(List<String> list, String value) {
-        if (list != null && !list.isEmpty()) {
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).equals(value)) {
-                    return i;
-                }
-            }
-        }
-        return -1; // return -1 if the value is not found or if the list is empty
-    }
 
-    public static boolean getBooleanConfig(@NotNull String config) {
-        List<String> NameList = ToList(readConfigFile(),"name");
-        List<String> ValueList = ToList(readConfigFile(),"data");
-        int position = FindPosition(NameList,config);
-        if (position == -1) {
-            Iseeitall.LOGGER.error("The \"config\" parameter is wrong or the given list is empty");
-            return true;
-        } else {
-            String strValue = ValueList.get(position);
+    ////////////////////////////////
+    //0 = logWhenBreakBlock       //
+    //1 = logWhenHitEntity        //
+    //2 = logWhenUseItem          //
+    ////////////////////////////////
+    public static boolean getBooleanConfig(int config) {
+        try {
+            List<String> DataList = ToList(readConfigFile(), "data");
+            String strValue = DataList.get(config);
             return Boolean.parseBoolean(strValue);
+        } catch (IndexOutOfBoundsException e) {
+            Iseeitall.LOGGER.error("The entered number for the \"getBooleanConfig\" not return a boolean value");
+            Iseeitall.LOGGER.error("Returning true");
         }
+        return true;
     }
-
 }
