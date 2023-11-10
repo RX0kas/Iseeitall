@@ -75,14 +75,8 @@ public class TxTConfigLoader {
             System.out.println("If you are not a dev ignore this message");
             return new ArrayList<>();
         }
-    } // data or names
+    }
 
-
-    ////////////////////////////////
-    //0 = logWhenBreakBlock       //
-    //1 = logWhenHitEntity        //
-    //2 = logWhenUseItem          //
-    ////////////////////////////////
     public static boolean getBooleanConfig(int config) {
         try {
             List<String> DataList = ToList(readConfigFile(), "data");
