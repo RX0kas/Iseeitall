@@ -9,7 +9,7 @@
     "repo": "https://github.com/ninjagoku4560/Iseeitall"
   },
   "license": "MIT",
-  "icon": "assets/iseeitall/icon.png",
+  "icon": "assets/iseeitall/new_icon.png",
   "environment": "server",
   "entrypoints": {
     "client": [

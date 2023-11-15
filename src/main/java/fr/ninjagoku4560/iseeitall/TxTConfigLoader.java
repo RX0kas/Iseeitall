@@ -8,9 +8,11 @@ import java.util.List;
 
 public class TxTConfigLoader {
 
-    static String DefaultTxTContent = "logWhenBreakBlock=false\nlogWhenHitEntity=true\nlogWhenUseItem=true";
+    private static String TxTContent = "logWhenBreakBlock=false\nlogWhenHitEntity=true\nlogWhenUseItem=true\nlogIfOP=false";
 
-
+    public static void setTxTContent(String Content) {
+        TxTContent = Content;
+    }
     public static void createConfigFile() {
         try {
             String configDir = "config";
@@ -26,7 +28,7 @@ public class TxTConfigLoader {
             }
 
             FileWriter writer = new FileWriter(filePath);
-            writer.write(DefaultTxTContent);
+            writer.write(TxTContent);
             writer.close();
             Iseeitall.LOGGER.info("The ISIA configuration file was successfully created");
         } catch (IOException e) {
@@ -72,7 +74,7 @@ public class TxTConfigLoader {
             return ConfigData;
         } else {
             System.out.println("ToList function has a wrong parameter for RequestValue");
-            System.out.println("If you are not a dev ignore this message");
+            System.out.println("If you are not a dev, you can ignore this message");
             return new ArrayList<>();
         }
     }
