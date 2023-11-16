@@ -15,6 +15,7 @@ Default Content:<br>
 _logWhenBreakBlock=false <br>_
 _logWhenHitEntity=true <br>_
 _logWhenUseItem=true <br>_
+_logIfOP=false_ <br>
 
 ### logWhenBreakBlock: <br>
 This setting is used to determine whether you want to receive a message in the console, if a player breaks a block. <br>
@@ -22,4 +23,6 @@ This setting is used to determine whether you want to receive a message in the c
 This setting is used to determine whether you want to receive a message in the console if a player hits an entity. <br>
 ### logWhenUseItem: <br>
 This setting is used to determine whether you want to receive a message in the console if a player use an item. <br>
+### logIfOP: <br>
+Thus setting is used to determine if the moderator will be log
 
