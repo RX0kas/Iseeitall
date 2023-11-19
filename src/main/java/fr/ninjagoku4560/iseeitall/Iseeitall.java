@@ -3,8 +3,12 @@ package fr.ninjagoku4560.iseeitall;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.minecraft.text.Text;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import static net.minecraft.server.command.CommandManager.*;
 
 public class Iseeitall implements ModInitializer {
     /**
@@ -18,5 +22,18 @@ public class Iseeitall implements ModInitializer {
 
         TxTConfigLoader.setTxTContent("logWhenBreakBlock=false\nlogWhenHitEntity=true\nlogWhenUseItem=true\nlogIfOP=false");
         Event.RegisterEvent();
+
+
+        //register the reload command
+        String CommandName = "reloadISIAConfig";
+
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(literal(CommandName)
+                .requires(source -> source.hasPermissionLevel(2))
+                .executes(context -> {
+                    Event.RegisterEvent();
+                    context.getSource().sendFeedback(() -> Text.literal("The config was reload"), false);
+                    return 1;})));
+
     }
+
 }
