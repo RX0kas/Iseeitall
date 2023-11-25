@@ -8,12 +8,9 @@ import java.util.List;
 
 public class TxTConfigLoader {
 
-    private static String TxTContent = "logWhenBreakBlock=false\nlogWhenHitEntity=true\nlogWhenUseItem=true\nlogIfOP=false";
+    //private static String TxTContent = "logIfOP=false\nlogWhenBreakBlock=false\nlogWhenHitEntity=true\nlogWhenUseItem=true\nlogWhenUseBlock=true\nlogWhenUseEntity=true";
 
-    public static void setTxTContent(String Content) {
-        TxTContent = Content;
-    }
-    public static void createConfigFile() {
+    public static void createConfigFile(String content) {
         try {
             String configDir = "config";
             String filePath = configDir + "/ISIA.txt";
@@ -28,7 +25,7 @@ public class TxTConfigLoader {
             }
 
             FileWriter writer = new FileWriter(filePath);
-            writer.write(TxTContent);
+            writer.write(content);
             writer.close();
             Iseeitall.LOGGER.info("The ISIA configuration file was successfully created");
         } catch (IOException e) {

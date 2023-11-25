@@ -16,27 +16,29 @@ public class Event {
     public static void RegisterEvent() {
         ActionResult PASS = ActionResult.PASS;
         ////////////////////////////////
-        //0 = logWhenBreakBlock       //
+        //0 = logIfOP                 //
         //1 = logWhenHitEntity        //
         //2 = logWhenUseItem          //
-        //3 = logIfOP                 //
+        //3 = logWhenBreakBlock       //
+        //4 = logWhenUseBlock         //
+        //5 = logWhenUseEntity        //
         ////////////////////////////////
-        if (TxTConfigLoader.getBooleanConfig(0)) {
+        if (TxTConfigLoader.getBooleanConfig(1)) {
             // Player break a block
             AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
                 // if the player is OP then do nothing
-                if (!(getPlayerInfo.isOP(player) && !TxTConfigLoader.getBooleanConfig(3))) {
+                if (!(getPlayerInfo.isOP(player) && !TxTConfigLoader.getBooleanConfig(0))) {
                     Iseeitall.LOGGER.info("The player "+player.getName().toString()+" to break " + getName.Block(world,pos));
                 }
                 return PASS;
             });
         }
 
-        if (TxTConfigLoader.getBooleanConfig(1)) {
+        if (TxTConfigLoader.getBooleanConfig(2)) {
             // Player hit other entity
             AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
                 // if the player is OP then do nothing
-                if (!(getPlayerInfo.isOP(player) && !TxTConfigLoader.getBooleanConfig(3))) {
+                if (!(getPlayerInfo.isOP(player) && !TxTConfigLoader.getBooleanConfig(0))) {
                     Iseeitall.LOGGER.info("The player " + player.getName().toString() + " hit " + getName.Entity(entity));
 
                 }
@@ -44,11 +46,11 @@ public class Event {
             });
         }
 
-        if (TxTConfigLoader.getBooleanConfig(2)) {
+        if (TxTConfigLoader.getBooleanConfig(3)) {
             // Player use an Item
             UseItemCallback.EVENT.register((player, world, hand) -> {
                 // if the player is OP then do nothing
-                if (!(getPlayerInfo.isOP(player) && !TxTConfigLoader.getBooleanConfig(3))) {
+                if (!(getPlayerInfo.isOP(player) && !TxTConfigLoader.getBooleanConfig(0))) {
                     ItemStack heldItemStack = player.getStackInHand(hand);
                     Item heldItem = heldItemStack.getItem();
                     Iseeitall.LOGGER.info("The player " + player.getName().toString() + " used " + getName.Item(heldItem));
@@ -57,12 +59,23 @@ public class Event {
             });
         }
 
-        if (TxTConfigLoader.getBooleanConfig(0)) {
-            // Player break a block
-            AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
+        if (TxTConfigLoader.getBooleanConfig(4)) {
+            // Player use a block
+            UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
                 // if the player is OP then do nothing
-                if (!(getPlayerInfo.isOP(player) && !TxTConfigLoader.getBooleanConfig(3))) {
-                    Iseeitall.LOGGER.info("The player "+player.getName().toString()+" to break " + getName.Block(world,pos));
+                if (!(getPlayerInfo.isOP(player) && !TxTConfigLoader.getBooleanConfig(0))) {
+                    Iseeitall.LOGGER.info("The player "+player.getName().toString()+" use" + getName.Block(world, hitResult.getBlockPos()));
+                }
+                return PASS;
+            });
+        }
+        if (TxTConfigLoader.getBooleanConfig(5)) {
+            // Player use an Entity
+            UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
+                // if the player is OP then do nothing
+                if (!(getPlayerInfo.isOP(player) && !TxTConfigLoader.getBooleanConfig(0))) {
+                    assert hitResult != null;
+                    Iseeitall.LOGGER.info("The player "+player.getName().toString()+" use" + getName.Entity(hitResult.getEntity()));
                 }
                 return PASS;
             });

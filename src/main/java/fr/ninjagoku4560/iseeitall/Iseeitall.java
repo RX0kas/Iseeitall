@@ -18,9 +18,7 @@ public class Iseeitall implements ModInitializer {
     @Override
     public void onInitialize() {
         LOGGER.info("Initialization of the ISIA mod server side");
-        TxTConfigLoader.createConfigFile();
-
-        TxTConfigLoader.setTxTContent("logWhenBreakBlock=false\nlogWhenHitEntity=true\nlogWhenUseItem=true\nlogIfOP=false");
+        TxTConfigLoader.createConfigFile("logIfOP=false\nlogWhenBreakBlock=false\nlogWhenHitEntity=true\nlogWhenUseItem=true\nlogWhenUseBlock=true\nlogWhenUseEntity=true");
         Event.RegisterEvent();
 
 
@@ -33,6 +31,7 @@ public class Iseeitall implements ModInitializer {
                     Event.RegisterEvent();
                     context.getSource().sendFeedback(() -> Text.literal("The config was reload"), false);
                     return 1;})));
+
 
     }
 
