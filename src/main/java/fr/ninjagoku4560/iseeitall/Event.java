@@ -12,7 +12,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.TypedActionResult;
 
+
 public class Event {
+
     public static void RegisterEvent() {
         ActionResult PASS = ActionResult.PASS;
         ////////////////////////////////
@@ -22,6 +24,7 @@ public class Event {
         //3 = logWhenBreakBlock       //
         //4 = logWhenUseBlock         //
         //5 = logWhenUseEntity        //
+        //6 = logIfStartSleeping      //
         ////////////////////////////////
         if (TxTConfigLoader.getBooleanConfig(1)) {
             // Player break a block
@@ -29,6 +32,7 @@ public class Event {
                 // if the player is OP then do nothing
                 if (!(getPlayerInfo.isOP(player) && !TxTConfigLoader.getBooleanConfig(0))) {
                     Iseeitall.LOGGER.info("The player "+player.getName().toString()+" to break " + getName.Block(world,pos));
+                    return ActionResult.SUCCESS;
                 }
                 return PASS;
             });
@@ -40,7 +44,7 @@ public class Event {
                 // if the player is OP then do nothing
                 if (!(getPlayerInfo.isOP(player) && !TxTConfigLoader.getBooleanConfig(0))) {
                     Iseeitall.LOGGER.info("The player " + player.getName().toString() + " hit " + getName.Entity(entity));
-
+                    return ActionResult.SUCCESS;
                 }
                 return PASS;
             });
@@ -54,6 +58,7 @@ public class Event {
                     ItemStack heldItemStack = player.getStackInHand(hand);
                     Item heldItem = heldItemStack.getItem();
                     Iseeitall.LOGGER.info("The player " + player.getName().toString() + " used " + getName.Item(heldItem));
+                    return TypedActionResult.success(ItemStack.EMPTY);
                 }
                 return TypedActionResult.pass(ItemStack.EMPTY);
             });
@@ -65,6 +70,7 @@ public class Event {
                 // if the player is OP then do nothing
                 if (!(getPlayerInfo.isOP(player) && !TxTConfigLoader.getBooleanConfig(0))) {
                     Iseeitall.LOGGER.info("The player "+player.getName().toString()+" use" + getName.Block(world, hitResult.getBlockPos()));
+                    return ActionResult.SUCCESS;
                 }
                 return PASS;
             });
@@ -76,9 +82,16 @@ public class Event {
                 if (!(getPlayerInfo.isOP(player) && !TxTConfigLoader.getBooleanConfig(0))) {
                     assert hitResult != null;
                     Iseeitall.LOGGER.info("The player "+player.getName().toString()+" use" + getName.Entity(hitResult.getEntity()));
+                    return ActionResult.SUCCESS;
                 }
                 return PASS;
             });
+        }
+        if (TxTConfigLoader.getBooleanConfig(6)) {
+            // Player start sleep
+            if (!(getPlayerInfo.isOP(player) && !TxTConfigLoader.getBooleanConfig(0))) {
+
+            }
         }
     }
 }
