@@ -25,10 +25,11 @@ public class Iseeitall implements ModInitializer {
 
 
         LOGGER.info("Initialization of the ISIA mod server side");
-        TxTConfigLoader.createConfigFile("logIfOP=false\nlogWhenBreakBlock=false\nlogWhenHitEntity=true\nlogWhenUseItem=true\nlogWhenUseBlock=true\nlogWhenUseEntity=true\nlogIfStartSleeping=true");
+        TxTConfigLoader.createConfigFile("logIfOP=false\nlogWhenBreakBlock=false\nlogWhenHitEntity=true\nlogWhenUseItem=true\nlogWhenUseBlock=true\nlogWhenUseEntity=true\nlogIfStartSleeping=false\nlogIfStopSleeping=false");
         Event.RegisterEvent();
 
         EntitySleepEvents.START_SLEEPING.register(SleepingEvent::onStartSleeping);
+        EntitySleepEvents.STOP_SLEEPING.register(SleepingEvent::onStopSleeping);
 
         //register the reload command
         String CommandName = "reloadISIAConfig";

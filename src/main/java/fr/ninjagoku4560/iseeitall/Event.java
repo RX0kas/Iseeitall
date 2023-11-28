@@ -87,11 +87,6 @@ public class Event {
                 return PASS;
             });
         }
-        if (TxTConfigLoader.getBooleanConfig(6)) {
-            // Player start sleep
-            if (!(getPlayerInfo.isOP(player) && !TxTConfigLoader.getBooleanConfig(0))) {
-
-            }
-        }
     }
+
 }
