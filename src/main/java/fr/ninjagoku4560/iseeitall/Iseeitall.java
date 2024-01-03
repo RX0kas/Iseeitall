@@ -5,9 +5,11 @@ import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
+import net.minecraft.server.command.CommandManager;
 import net.minecraft.text.Text;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import com.mojang.brigadier.arguments.StringArgumentType;
 
 import fr.ninjagoku4560.iseeitall.CustomEvent.*;
 
@@ -21,9 +23,6 @@ public class Iseeitall implements ModInitializer {
 
     @Override
     public void onInitialize() {
-
-
-
         LOGGER.info("Initialization of the ISIA mod server side");
         TxTConfigLoader.createConfigFile("logIfOP=false\nlogWhenBreakBlock=false\nlogWhenHitEntity=true\nlogWhenUseItem=true\nlogWhenUseBlock=true\nlogWhenUseEntity=true\nlogIfStartSleeping=false\nlogIfStopSleeping=false");
         Event.RegisterEvent();
@@ -32,9 +31,9 @@ public class Iseeitall implements ModInitializer {
         EntitySleepEvents.STOP_SLEEPING.register(SleepingEvent::onStopSleeping);
 
         //register the reload command
-        String CommandName = "reloadISIAConfig";
+        String ReloadCommandName = "reloadISIAConfig";
 
-        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(literal(CommandName)
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(literal(ReloadCommandName)
                 .requires(source -> source.hasPermissionLevel(2))
                 .executes(context -> {
                     Event.RegisterEvent();
@@ -42,6 +41,16 @@ public class Iseeitall implements ModInitializer {
                     return 1;})));
 
 
+        String getCommandName = "getISIAConfig";
+
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(literal(getCommandName)
+                .requires(source -> source.hasPermissionLevel(2))
+                .then(CommandManager.argument("Name of the config", StringArgumentType.string()))
+                .executes(getConfig::execute)));
+
+
     }
+
+
 
 }

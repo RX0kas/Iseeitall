@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "iseeitall",
-  "version": "${version}",
+  "version": "1.0.0",
   "name": "ISIA",
   "description": "It's a fabric server side logger mod.",
   "authors": ["ninjagoku4560"],
