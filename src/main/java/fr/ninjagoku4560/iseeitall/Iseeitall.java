@@ -39,16 +39,6 @@ public class Iseeitall implements ModInitializer {
                     Event.RegisterEvent();
                     context.getSource().sendFeedback(() -> Text.literal("The config was reload"), false);
                     return 1;})));
-
-
-        String getCommandName = "getISIAConfig";
-
-        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(literal(getCommandName)
-                .requires(source -> source.hasPermissionLevel(2))
-                .then(CommandManager.argument("Name of the config", StringArgumentType.string()))
-                .executes(getConfig::execute)));
-
-
     }
 
 
