@@ -32,7 +32,7 @@ public class Event {
                 // if the player is OP then do nothing
                 if (!(getPlayerInfo.isOP(player) && !TxTConfigLoader.getBooleanConfig(0))) {
                     Iseeitall.LOGGER.info("The player "+player.getName().toString()+" to break " + getName.Block(world,pos));
-                    return ActionResult.SUCCESS;
+                    return PASS;
                 }
                 return PASS;
             });
@@ -44,7 +44,7 @@ public class Event {
                 // if the player is OP then do nothing
                 if (!(getPlayerInfo.isOP(player) && !TxTConfigLoader.getBooleanConfig(0))) {
                     Iseeitall.LOGGER.info("The player " + player.getName().toString() + " hit " + getName.Entity(entity));
-                    return ActionResult.SUCCESS;
+                    return PASS;
                 }
                 return PASS;
             });
@@ -70,7 +70,7 @@ public class Event {
                 // if the player is OP then do nothing
                 if (!(getPlayerInfo.isOP(player) && !TxTConfigLoader.getBooleanConfig(0))) {
                     Iseeitall.LOGGER.info("The player "+player.getName().toString()+" use" + getName.Block(world, hitResult.getBlockPos()));
-                    return ActionResult.SUCCESS;
+                    return PASS;
                 }
                 return PASS;
             });
@@ -82,7 +82,7 @@ public class Event {
                 if (!(getPlayerInfo.isOP(player) && !TxTConfigLoader.getBooleanConfig(0))) {
                     assert hitResult != null;
                     Iseeitall.LOGGER.info("The player "+player.getName().toString()+" use" + getName.Entity(hitResult.getEntity()));
-                    return ActionResult.SUCCESS;
+                    return PASS;
                 }
                 return PASS;
             });

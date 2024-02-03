@@ -5,11 +5,9 @@ import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
-import net.minecraft.server.command.CommandManager;
 import net.minecraft.text.Text;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import com.mojang.brigadier.arguments.StringArgumentType;
 
 import fr.ninjagoku4560.iseeitall.CustomEvent.*;
 
@@ -39,6 +37,8 @@ public class Iseeitall implements ModInitializer {
                     Event.RegisterEvent();
                     context.getSource().sendFeedback(() -> Text.literal("The config was reload"), false);
                     return 1;})));
+
+
     }
 
 
