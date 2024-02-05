@@ -1,6 +1,6 @@
 package fr.ninjagoku4560.iseeitall.CustomEvent;
 
-import fr.ninjagoku4560.iseeitall.TxTConfigLoader;
+import fr.ninjagoku4560.iseeitall.utilities.TxTConfigLoader;
 import fr.ninjagoku4560.iseeitall.utilities.getPlayerInfo;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

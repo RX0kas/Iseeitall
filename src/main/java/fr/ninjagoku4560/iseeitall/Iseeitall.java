@@ -1,6 +1,7 @@
 package fr.ninjagoku4560.iseeitall;
 
 
+import fr.ninjagoku4560.iseeitall.utilities.TxTConfigLoader;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -8,6 +9,8 @@ import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
 import net.minecraft.text.Text;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import fr.ninjagoku4560.iseeitall.utilities.FileUtil;
 
 import fr.ninjagoku4560.iseeitall.CustomEvent.*;
 
@@ -18,6 +21,8 @@ public class Iseeitall implements ModInitializer {
      * Runs the mod initializer.
      */
     public static Logger LOGGER = LogManager.getLogger("Iseeitall");
+
+    public static String DATAFOLDER = FileUtil.createFolder("data");
 
     @Override
     public void onInitialize() {
@@ -37,8 +42,15 @@ public class Iseeitall implements ModInitializer {
                     Event.RegisterEvent();
                     context.getSource().sendFeedback(() -> Text.literal("The config was reload"), false);
                     return 1;})));
+        ///////////////////////
+        LOGGER.info("Initialization of the Steal Detection");
+        StealDetection.init();
 
 
+
+
+
+        LOGGER.info("Initialization completed");
     }
 
 

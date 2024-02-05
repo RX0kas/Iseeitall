@@ -1,5 +1,7 @@
-package fr.ninjagoku4560.iseeitall;
+package fr.ninjagoku4560.iseeitall.utilities;
 
+
+import fr.ninjagoku4560.iseeitall.Iseeitall;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -24,12 +26,17 @@ public class TxTConfigLoader {
                 }
             }
 
-            FileWriter writer = new FileWriter(filePath);
-            writer.write(content);
-            writer.close();
-            Iseeitall.LOGGER.info("The ISIA configuration file was successfully created");
+            File configFile = new File(filePath);
+            if (!configFile.exists()) {
+                FileWriter writer = new FileWriter(filePath);
+                writer.write(content);
+                writer.close();
+                Iseeitall.LOGGER.info("The ISIA configuration file was successfully created");
+            } else {
+                Iseeitall.LOGGER.info("The ISIA configuration file already exists. Skipping creation.");
+            }
         } catch (IOException e) {
-            Iseeitall.LOGGER.error("The ISIA configuration file was not created!");
+            Iseeitall.LOGGER.error("An error occurred while creating the ISIA configuration file!");
             Iseeitall.LOGGER.error(e.toString());
         }
     }
