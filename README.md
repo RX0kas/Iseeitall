@@ -12,17 +12,24 @@
 ## Config File:
 You can find it in the config folder, his name is "ISIA.txt". <br>
 Default Content:<br>
+_logIfOP=false_ <br>
 _logWhenBreakBlock=false <br>_
 _logWhenHitEntity=true <br>_
 _logWhenUseItem=true <br>_
-_logIfOP=false_ <br>
+_logWhenUseBlock=true <br>_
+_logWhenUseEntity=true <br>_
 
+### logIfOP: <br>
+This setting is used to determine if the moderator will be log
 ### logWhenBreakBlock: <br>
 This setting is used to determine whether you want to receive a message in the console, if a player breaks a block. <br>
 ### logWhenHitEntity: <br>
 This setting is used to determine whether you want to receive a message in the console if a player hits an entity. <br>
 ### logWhenUseItem: <br>
 This setting is used to determine whether you want to receive a message in the console if a player use an item. <br>
-### logIfOP: <br>
-Thus setting is used to determine if the moderator will be log
+### logWhenUseBlock:
+This setting is used to determine whether you want to receive a message in the console if a player use a block entity <br>
+### logWhenUseEntity:
+This setting is used to determine whether you want to receive a message in the console if a player use an entity like ride it
+
 
