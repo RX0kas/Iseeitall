@@ -64,9 +64,9 @@ public class Event {
                     ItemStack heldItemStack = player.getStackInHand(hand);
                     Item heldItem = heldItemStack.getItem();
                     Iseeitall.LOGGER.info("The player " + player.getName().getString() + " used " + getName.Item(heldItem));
-                    return TypedActionResult.success(ItemStack.EMPTY);
+                    return TypedActionResult.pass(heldItemStack);
                 }
-                return TypedActionResult.pass(ItemStack.EMPTY);
+                return TypedActionResult.pass(player.getStackInHand(hand));
             });
         }
 
