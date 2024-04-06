@@ -10,8 +10,6 @@ import java.util.List;
 
 public class TxTConfigLoader {
 
-    //private static String TxTContent = "logIfOP=false\nlogWhenBreakBlock=false\nlogWhenHitEntity=true\nlogWhenUseItem=true\nlogWhenUseBlock=true\nlogWhenUseEntity=true";
-
     public static void createConfigFile(String content) {
         try {
             String configDir = "config";
@@ -78,7 +76,6 @@ public class TxTConfigLoader {
             return ConfigData;
         } else {
             System.out.println("ToList function has a wrong parameter for RequestValue");
-            System.out.println("If you are not a dev, you can ignore this message");
             return new ArrayList<>();
         }
     }

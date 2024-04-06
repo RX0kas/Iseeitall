@@ -41,19 +41,21 @@ public class FileUtil {
         }
     }
 
-    public static String readFromFile(String filePath) {
-        StringBuilder content = new StringBuilder();
 
+    public static String read(String filePath){
+        File file = new File(filePath);
+        if (!file.exists()) {return null;}
+        String content = "";
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                content.append(line).append("\n");
+                content += line;
             }
         } catch (IOException e) {
-            Iseeitall.LOGGER.error("Erreur lors de la lecture depuis le fichier : " + e.getMessage());
+            Iseeitall.LOGGER.error("Error while reading the file : "+filePath+" : " + e.getMessage());
         }
 
-        return content.toString();
+        return content;
     }
 
     public static boolean isFileEmpty(Path path) {

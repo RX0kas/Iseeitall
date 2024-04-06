@@ -23,15 +23,6 @@ public class Event {
 
     public static void RegisterEvent() {
         ActionResult PASS = ActionResult.PASS;
-        ////////////////////////////////
-        //0 = logIfOP                 //
-        //1 = logWhenHitEntity        //
-        //2 = logWhenUseItem          //
-        //3 = logWhenBreakBlock       //
-        //4 = logWhenUseBlock         //
-        //5 = logWhenUseEntity        //
-        //6 = logIfStartSleeping      //
-        ////////////////////////////////
         if (TxTConfigLoader.getBooleanConfig(1)) {
             // Player break a block
             AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {

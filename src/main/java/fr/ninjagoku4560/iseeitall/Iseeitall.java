@@ -1,6 +1,8 @@
 package fr.ninjagoku4560.iseeitall;
 
 
+import fr.ninjagoku4560.iseeitall.experimental.ModExperimentalFeature;
+import fr.ninjagoku4560.iseeitall.experimental.StealDetection;
 import fr.ninjagoku4560.iseeitall.utilities.TxTConfigLoader;
 import net.fabricmc.api.ModInitializer;
 
@@ -14,7 +16,9 @@ import fr.ninjagoku4560.iseeitall.utilities.FileUtil;
 
 import fr.ninjagoku4560.iseeitall.CustomEvent.*;
 
+
 import static net.minecraft.server.command.CommandManager.*;
+
 
 public class Iseeitall implements ModInitializer {
     /**
@@ -22,12 +26,12 @@ public class Iseeitall implements ModInitializer {
      */
     public static Logger LOGGER = LogManager.getLogger("Iseeitall");
 
-    public static String DATAFOLDER = FileUtil.createFolder("data");
+    public static String DATAFOLDER = FileUtil.createFolder("ISIAdata");
 
     @Override
     public void onInitialize() {
         LOGGER.info("Initialization of the ISIA mod server side");
-        TxTConfigLoader.createConfigFile("logIfOP=false\nlogWhenBreakBlock=false\nlogWhenHitEntity=true\nlogWhenUseItem=true\nlogWhenUseBlock=true\nlogWhenUseEntity=true\nlogIfStartSleeping=false\nlogIfStopSleeping=false");
+        TxTConfigLoader.createConfigFile("logIfOP=false\nlogWhenBreakBlock=false\nlogWhenHitEntity=true\nlogWhenUseItem=true\nlogWhenUseBlock=true\nlogWhenUseEntity=true\nlogIfStartSleeping=false\nlogIfStopSleeping=false\nExperimentalFeature=false\n");
         Event.RegisterEvent();
 
         EntitySleepEvents.START_SLEEPING.register(SleepingEvent::onStartSleeping);
@@ -40,17 +44,13 @@ public class Iseeitall implements ModInitializer {
                 .requires(source -> source.hasPermissionLevel(2))
                 .executes(context -> {
                     Event.RegisterEvent();
+                    ModExperimentalFeature.init();
                     context.getSource().sendFeedback(() -> Text.literal("The config was reload"), false);
                     return 1;})));
         ///////////////////////
-        LOGGER.info("Initialization of the Steal Detection");
+
+        // Experimental feature
         StealDetection.init();
-
-
-
-
-
-        LOGGER.info("Initialization completed");
     }
 
 
