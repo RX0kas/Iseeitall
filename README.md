@@ -7,7 +7,7 @@
 ## Required:
 * [Fabric](https://fabricmc.net/)
 * [Fabric API](https://modrinth.com/mod/fabric-api)
-* Minecraft serveur
+* Minecraft server
 
 ## Config File:
 You can find it in the config folder, his name is "ISIA.txt". <br>
